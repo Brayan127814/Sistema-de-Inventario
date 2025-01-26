@@ -62,12 +62,42 @@ export const userLogin = async (email, password) => {
             localStorage.setItem("user", JSON.stringify(data.user))
             alert('Inicio de sesiòn exitosa')
             return data
-        }else{
+        } else {
             return false
         }
     } catch (error) {
         console.error(`Ocurrio el siguiente error ${error}`)
         return false
 
+    }
+}
+
+//Obtener usuario poe ID
+
+
+export const getUserById = async (iduser) => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+        throw new Error('No has iniciado  sesión')
+    }
+    try {
+
+        const response = await fetch(`${api}/getUserById/${iduser}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+
+        if (!response) {
+            throw new Error(`Error al obtener el usuario: ${response.statusText}`)
+        }
+
+        return await response.json()
+    } catch (error) {
+
+            console.error(`Se presentó el siguiente error ${error}`)
+            throw new Error(`Error al obtener el usuario: ${response.statusText}`)
     }
 }
