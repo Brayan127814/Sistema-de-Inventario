@@ -101,3 +101,7 @@ export const getUserById = async (iduser) => {
             throw new Error(`Error al obtener el usuario: ${response.statusText}`)
     }
 }
+git
+//Actualizar los datos del usuario
+
+     
